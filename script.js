@@ -1,13 +1,12 @@
 function saveNameAndRedirect() {
   const name = document.getElementById('nameInput').value.trim();
   if (name) {
-    // Gửi dữ liệu tên lên Getform
     fetch("https://getform.io/f/bronljda", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/x-www-form-urlencoded"
       },
-      body: JSON.stringify({ name: name })
+      body: new URLSearchParams({ Name: name })  // lưu ý chữ "Name" viết hoa như bạn dùng trong URL query
     })
     .then(res => {
       if (res.ok) {
@@ -18,10 +17,7 @@ function saveNameAndRedirect() {
     })
     .catch(err => console.error("Lỗi kết nối:", err));
 
-    // Lưu tên vào localStorage nếu cần
     localStorage.setItem('guestName', name);
-
-    // Chuyển trang
     window.location.href = "invite.html";
   } else {
     alert("Vui lòng nhập tên!");
