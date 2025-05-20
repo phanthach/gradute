@@ -1,7 +1,7 @@
 function saveNameAndRedirect() {
   const name = document.getElementById('nameInput').value.trim();
   if (name) {
-    const url = `https://getform.io/f/bronljda?Name=${encodeURIComponent(name)}`;
+    const url = `https://getform.io/f/bronljda?Name=${name}`;
 
   // Gửi request GET
   fetch(url)
