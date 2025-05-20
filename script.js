@@ -1,27 +1,28 @@
 function saveNameAndRedirect() {
   const name = document.getElementById('nameInput').value.trim();
   if (name) {
-    // Lưu vào localStorage
     localStorage.setItem('guestName', name);
 
-    // Gửi về server để lưu vào file
-    fetch('https://formspree.io/f/xdkgjyro', {
-      method: 'POST',
+    // Gửi tên qua Formspree
+    fetch("https://formspree.io/f/xdkgjyro", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
+        "Accept": "application/json"
       },
-      body: JSON.stringify({ name: name })
-    })
-    .then(response => {
-      if (!response.ok) {
-        console.error('Lưu tên thất bại!');
+      body: JSON.stringify({
+        name: name
+      })
+    }).then(response => {
+      if (response.ok) {
+        console.log("Đã gửi tên đến Formspree");
+      } else {
+        console.error("Lỗi khi gửi đến Formspree");
       }
-    })
-    .catch(err => {
-      console.error('Lỗi kết nối server:', err);
+    }).catch(error => {
+      console.error("Lỗi kết nối:", error);
     });
 
-    // Chuyển trang
     window.location.href = "invite.html";
   } else {
     alert("Vui lòng nhập tên!");
