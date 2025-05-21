@@ -1,7 +1,7 @@
 function saveNameAndRedirect() {
   const name = document.getElementById('nameInput').value.trim();
   if (name) {
-    const url = `https://script.google.com/macros/s/AKfycbwmDAZEpBIr6aXlHMP8D_TTSIYOK2YVXkvsI5J0C2LE4bYS69pcthiZZWZLqByoNNeA/exec`;
+    const url = `https://script.google.com/macros/s/AKfycbxV9rfs9VqbzRNclk-Se1hhJjCSNyl3ctxN3wfZbS1ErzCsTpmyMUnjhpsZB9Eqh1qb/exec`;
     
     // Gửi request POST
     fetch(url, {
