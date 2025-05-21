@@ -92,6 +92,8 @@
     function saveNameAndRedirect() {
   const name = document.getElementById('nameInput').value.trim();
   if (name) {
+    button.disabled = true;
+    button.innerText = "Đang gửi...";
     // Thêm tham số Name vào URL
     const url = `https://script.google.com/macros/s/AKfycbxV9rfs9VqbzRNclk-Se1hhJjCSNyl3ctxN3wfZbS1ErzCsTpmyMUnjhpsZB9Eqh1qb/exec?Name=${encodeURIComponent(name)}`;
     
