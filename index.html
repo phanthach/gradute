@@ -108,6 +108,7 @@
         } else {
           console.log('Lỗi khi gửi dữ liệu');
         }
+        localStorage.setItem("guestName", name);
         window.location.href = "invite.html";
       })
       .catch(error => {
