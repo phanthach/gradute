@@ -1,28 +1,30 @@
 function saveNameAndRedirect() {
   const name = document.getElementById('nameInput').value.trim();
-  if (name) {
-    // Tạo form data
-    const formData = new FormData();
-    formData.append("Name", name);
-
-    // Gửi POST request
-    fetch("https://getform.io/f/bronljda", {
-      method: "POST",
-      body: formData
-    })
-    .then(response => {
-      if (response.ok) {
-        console.log("Gửi dữ liệu thành công");
-      } else {
-        console.log("Lỗi khi gửi dữ liệu");
-      }
-    })
-    .catch(error => console.error("Lỗi mạng:", error));
-
-    // Lưu vào localStorage và chuyển trang
-    localStorage.setItem("guestName", name);
-    window.location.href = "invite.html";
-  } else {
+  if (!name) {
     alert("Vui lòng nhập tên!");
+    return;
   }
+
+  const formData = new URLSearchParams();
+  formData.append("Name", name);
+
+  fetch("https://script.google.com/macros/s/AKfycbxW-JZgH6oZ5JNU7WWyB-KDLdzvNmbLfgA98XPZY35mukYH6Gp6Kfw5zKYzKr0cf3TS4g/exec", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    body: formData.toString()
+  })
+  .then(response => {
+    if (response.ok) {
+      localStorage.setItem("guestName", name);
+      window.location.href = "invite.html";
+    } else {
+      alert("Gửi dữ liệu thất bại.");
+    }
+  })
+  .catch(error => {
+    console.error("Lỗi mạng:", error);
+    alert("Đã xảy ra lỗi.");
+  });
 }
