@@ -88,33 +88,36 @@
 
   <button class="button" onclick="saveNameAndRedirect()">Tôi tới rồi đây</button>
 
-  <script>
-    function saveNameAndRedirect() {
-  const name = document.getElementById('nameInput').value.trim();
-  const button = document.querySelector('.button'
-      if (name) {
+<script>
+  function saveNameAndRedirect() {
+    const name = document.getElementById('nameInput').value.trim();
+    const button = document.querySelector('.button');
+
     button.disabled = true;
     button.innerText = "Đang gửi...";
-    // Thêm tham số Name vào URL
-    const url = `https://script.google.com/macros/s/AKfycbxV9rfs9VqbzRNclk-Se1hhJjCSNyl3ctxN3wfZbS1ErzCsTpmyMUnjhpsZB9Eqh1qb/exec?Name=${encodeURIComponent(name)}`;
-    
-    // Gửi request POST không có body, chỉ có params trên URL
-    fetch(url, {
-      method: 'POST'
-    })
-    .then(response => {
-      if (response.ok) {
-        console.log('Tên đã được lưu thành công');
+
+    if (name) {
+      const url = `https://script.google.com/macros/s/AKfycbxV9rfs9VqbzRNclk-Se1hhJjCSNyl3ctxN3wfZbS1ErzCsTpmyMUnjhpsZB9Eqh1qb/exec?Name=${encodeURIComponent(name)}`;
+
+      fetch(url, {
+        method: 'POST'
+      })
+      .then(response => {
+        if (response.ok) {
+          console.log('Tên đã được lưu thành công');
+        } else {
+          console.log('Lỗi khi gửi dữ liệu');
+        }
         window.location.href = "invite.html";
-      } else {
-        console.log('Lỗi khi gửi dữ liệu');
-      }
-    })
-    .catch(error => console.error('Lỗi mạng:', error));
-  } else {
-    alert("Vui lòng nhập tên!");
-  }
+      })
+      .catch(error => {
+        console.error('Lỗi mạng:', error);
+        window.location.href = "invite.html";
+      });
+    } else {
+      window.location.href = "invite.html"; // chuyển luôn nếu không nhập tên
     }
-  </script>
+  }
+</script>
 </body>
 </html>
