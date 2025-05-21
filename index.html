@@ -91,6 +91,7 @@
   <script>
   function saveNameAndRedirect() {
     const name = document.getElementById('nameInput').value.trim();
+    localStorage.setItem("guestName", name);
     const button = document.querySelector('.button');
 
     button.disabled = true;
@@ -108,7 +109,6 @@
         } else {
           console.log('Lỗi khi gửi dữ liệu');
         }
-        localStorage.setItem("guestName", name);
         window.location.href = "invite.html";
       })
       .catch(error => {
